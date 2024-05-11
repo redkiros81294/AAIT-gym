@@ -1,0 +1,94 @@
+body {
+    margin: 20px 0px 0px 0px;
+    padding: 0;
+    background-color: #242423;
+    color: white;
+   
+}
+
+.image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.upper{
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	padding:0px 20px 0px 10px;
+	}
+.social {
+    display: flex;
+    gap: 15px;
+   
+}
+
+.social a {
+    color: white;
+    
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.social a:hover {
+    color: gray;
+    
+}
+
+.footer {
+    max-width: 100%;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid gray;
+}
+
+.footer-text {
+    color: gray;
+    text-align:center;
+    
+}
+
+
+.fa {
+    cursor: pointer;
+    font-size: 2rem;
+    
+    color: gray;
+    
+    transition: color 0.3s;
+}
+
+.star.one {
+    color: gold;
+   
+}
+
+.star.two {
+    color: gold;
+    
+}
+
+.star.three {
+    color: gold;
+   
+}
+
+.star.four {
+    color: gold;
+    
+}
+
+.star.five {
+    color: gold;
+   
+}

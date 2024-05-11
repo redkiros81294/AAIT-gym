@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+  <title>Log In</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="icon" href="logo_top.png" type="image/png" sizes="16x16">
+</head>
+<body>
+  <header>
+    <div class="flip-card">
+      <div class="registration-form">
+        <!-- Log In Form -->
+        <section class="log-in-form">
+          <h1>Log In</h1>
+          <form>
+            <input type="email" class="longinput" name="email" autocomplete="complete" placeholder="Your Email" required>
+            <input type="password" class="longinput" name="password" placeholder="Password" required>
+            <div class="button-container">
+              <button class="button">Log In</button>
+            </div>
+          </form>
+          <p>I don't have an account <b class="flip" onclick="flipCard()">Sign Up</b></p>
+          <button class="longinput google"><img src="google-logo.png" id="google-logo" style="width:2em; height:2em;">Continue with Google</button>
+        </section>
+        <!-- Sign Up Form -->
+        <section class="sign-up-form">
+          <h1>Sign Up</h1>
+          <form id="signup-form">
+            <input type="email" class="longinput" name="email" autocomplete="complete" placeholder="Your Email" required>
+            <div class="shortinput-container">
+              <input type="text" class="shortinput" name="firstName" autocomplete="complete" placeholder="First Name" required>
+              <input type="text" class="shortinput" name="lastName" autocomplete="complete" placeholder="Last Name" required>
+            </div>
+            <input type="text" class="longinput" name="username" autocomplete="complete" placeholder="Username" required>
+            <div class="shortinput-container">
+              <input type="password" class="shortinput" id="password" name="password" placeholder="password" required>
+              <input type="password" class="shortinput" id="confirmPassword" name="confirmPassword" placeholder="confirm password" required><br>
+              <span id="passwordError" class="error-message"> </span>
+            </div>
+            <span id="error-message" class="error-message"></span>
+            <div class="check">
+              <input type="checkbox" class="checkbox" id="check-box">
+              <label for="check-box">Sign up with company code</label>
+            </div>
+            <input type="text" class="longinput hidden" id="company-code" name="companyCode" autocomplete="none" placeholder="Your Company Code">
+            <div class="button-container">
+              <button class="button">Sign Up</button>
+            </div>
+          </form>
+          <p>I have already an account <b class="flip" onclick="flipCard()">Log In</b></p>
+          <!-- <button class="longinput google"><img src="google-logo.png" id="google-logo" style="width:2em; height:2em;">Continue with Google</button> -->
+          <div class="g-signin2" data-onsuccess="onSignIn"> <button class="longinput google"><img src="google-logo.png" id="google-logo" style="width:2em; height:2em;">Continue with Google</button> </div>
+        </section>
+      </div>
+    </div>
+  </header>
+  <script >
+    function flipCard() {
+  var card = document.querySelector('.flip-card');
+  card.classList.toggle('flipped');
+}
+
+const checkbox = document.getElementById('check-box');
+const inputContainer = document.getElementById('company-code');
+
+checkbox.addEventListener('change', function() {
+  if (checkbox.checked) {
+    inputContainer.classList.remove('hidden');
+    inputContainer.setAttribute('required', 'true');
+  } else {
+    inputContainer.classList.add('hidden');
+    inputContainer.removeAttribute('required');
+  }
+});
+
+document.getElementById("signup-form").addEventListener("submit", function(event) {
+  var password = document.getElementById("password").value;
+  var confirmPassword = document.getElementById("confirmPassword").value;
+
+  var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+={}\[\]:;<>,.?\/\\]).{8,20}$/;
+
+  if (password!== confirmPassword) {
+    document.getElementById("passwordError").textContent = "Passwords do not match";
+    document.getElementById("passwordError").style.display = "block";
+    event.preventDefault();
+  } else if (!passwordRegex.test(password)) {
+    document.getElementById("passwordError").textContent = "Password must be 8-20 characters long and contain at least one uppercase letter, one lowercase letter, one special character, and one number";
+    document.getElementById("passwordError").style.display = "block";
+    event.preventDefault();
+  } else {
+    document.getElementById("passwordError").textContent = "";
+    document.getElementById("passwordError").style.display = "none";
+    event.target.submit();
+  }
+});
+
+var inputElements = document.querySelectorAll('input:not(#check-box)');
+
+inputElements.forEach(function(input) {
+  input.setAttribute('required', 'true');
+});
+
+// function onSignIn(googleUser) {
+//   var profile = googleUser.getBasicProfile();
+//   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+//   console.log('Name: ' + profile.getName());
+//   console.log('Image URL: ' + profile.getImageUrl());
+//   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+// }
+
+
+//for signning out a google user
+// <a href="#" onclick="signOut();">Sign out</a>
+// <script>
+//   function signOut() {
+//     var auth2 = gapi.auth2.getAuthInstance();
+//     auth2.signOut().then(function () {
+//       console.log('User signed out.');
+//     });
+//   }
+  </script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</body>
+</html>
